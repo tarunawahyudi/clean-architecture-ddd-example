@@ -5,6 +5,8 @@ namespace App\Interface\laravel\Http\Controllers;
 use App\Application\usecase\users\AddProductUseCase;
 use App\Application\usecase\users\DeleteProductUseCase;
 use App\Application\usecase\users\ShowProductUseCase;
+use App\Common\constant\App;
+use App\Common\constant\Str;
 use App\Domain\product\entities\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,7 +30,7 @@ class ProductController extends Controller
 
         $this->addProductUseCase->execute($product);
         return response()->json([
-            'status' => 'success',
+            Str::STATUS => App::RESPONSE_OK,
         ], 201);
     }
 
@@ -37,8 +39,8 @@ class ProductController extends Controller
         $id = $request->route('id');
         $result = $this->showProductUseCase->execute($id);
         return response()->json([
-            'status' => 'success',
-            'data' => $result
+            Str::STATUS => App::RESPONSE_OK,
+            Str::DATA => $result
         ]);
     }
 
@@ -46,8 +48,8 @@ class ProductController extends Controller
     {
         $result = $this->showProductUseCase->execute(null);
         return response()->json([
-            'status' => 'success',
-            'data' => $result
+            Str::STATUS => App::RESPONSE_OK,
+            Str::DATA => $result
         ]);
     }
 
@@ -56,8 +58,8 @@ class ProductController extends Controller
         $id = $request->route('id');
         $this->deleteProductUseCase->execute($id);
         return response()->json([
-            'status' => 'success',
-            'data' => __('response.delete_success')
+            Str::STATUS => App::RESPONSE_OK,
+            Str::MESSAGE => __('response.delete_success')
         ]);
     }
 }
