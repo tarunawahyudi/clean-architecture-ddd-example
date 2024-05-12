@@ -16,5 +16,9 @@ abstract class ProductUseCaseCore
         if (empty($product->getName())) {
             throw new \Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
         }
+
+        if (is_float($product->getPrice())) {
+            throw new \Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
+        }
     }
 }
