@@ -16,5 +16,6 @@ return [
 
     'system_error' => 'Terjadi kesalahan pada sistem kami. Mohon coba lagi nanti.',
     'method_not_allowed' => 'Method yang anda hit ke server kami salah. Mohon disesuaikan kembali',
-    'delete_success' => 'Data berhasil dihapus'
+    'delete_success' => 'Data berhasil dihapus',
+    'invalid_argument' => 'Data yang anda kirim ke server salah. Mohon periksa kembali.'
 ];

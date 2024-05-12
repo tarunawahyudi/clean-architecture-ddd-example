@@ -17,6 +17,13 @@ class TranslateErrors
         $response = $next($request);
         if ($response->exception) {
 
+            if ($response->exception instanceof \TypeError) {
+                return \response()->json([
+                    'status' => 'fail',
+                    'message' => __('response.invalid_argument')
+                ], 400);
+            }
+
             $translatedError = DomainErrorDictionary::translate($response->exception);
 
             if ($translatedError instanceof NotFoundErrorException) {
@@ -39,6 +46,8 @@ class TranslateErrors
                     'message' => __('response.method_not_allowed')
                 ], 405);
             }
+
+
 
             return response()->json([
                 'status' => 'error',
