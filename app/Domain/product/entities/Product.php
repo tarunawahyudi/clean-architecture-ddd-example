@@ -2,13 +2,48 @@
 
 namespace App\Domain\product\entities;
 
+use Exception;
+
 class Product
 {
-    public function __construct(
-       private string $name,
-       private int $price,
-       private string $description
-    ) {}
+    /**
+     * @throws Exception
+     */
+
+    private string $name;
+    private int $price;
+    private string $description;
+
+    /**
+     * @throws Exception
+     */
+    public function __construct($name, $price, $description) {
+        $this->validation($name, $price, $description);
+        $this->name = $name;
+        $this->price = $price;
+        $this->description = $description;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function validation(
+        ?string $name,
+        ?float $price,
+        ?string $description): void
+    {
+        if ($name == null || $name == '') {
+            throw new Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
+        }
+
+        if ($price == null) {
+            throw new Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
+        }
+
+        if ($description == null) {
+            throw new Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
+        }
+    }
 
     public function getName(): string
     {
@@ -39,6 +74,4 @@ class Product
     {
         $this->description = $description;
     }
-
-
 }

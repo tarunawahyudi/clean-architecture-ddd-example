@@ -2,10 +2,9 @@
 
 namespace Tests\Application\usecase;
 
-use App\Application\usecase\AddProductUseCase;
+use App\Application\usecase\users\AddProductUseCase;
 use App\Domain\product\ProductRepository;
 use PHPUnit\Framework\TestCase;
-use Tests\Domain\product\ProductRepositoryTest;
 
 class AddProductUseCaseTest extends TestCase
 {

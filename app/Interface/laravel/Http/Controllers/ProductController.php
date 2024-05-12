@@ -2,20 +2,21 @@
 
 namespace App\Interface\laravel\Http\Controllers;
 
-use App\Application\usecase\AddProductUseCase;
+use App\Application\usecase\users\AddProductUseCase;
+use App\Application\usecase\users\ShowProductUseCase;
 use App\Domain\product\entities\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use function Psy\debug;
 
 class ProductController extends Controller
 {
+    public function __construct(
+        private readonly AddProductUseCase $addProductUseCase,
+        private readonly ShowProductUseCase $showProductUseCase
+    ) {}
 
-    private AddProductUseCase $addProductUseCase;
-
-    public function __construct(AddProductUseCase $addProductUseCase)
-    {
-        $this->addProductUseCase = $addProductUseCase;
-    }
-    public function store(Request $request)
+    public function save(Request $request): JsonResponse
     {
         $product = new Product(
           $request->name,
@@ -26,7 +27,7 @@ class ProductController extends Controller
         $this->addProductUseCase->execute($product);
         return response()->json([
             'status' => 'success',
-        ]);
+        ], 201);
     }
 
     public function get()
@@ -34,9 +35,13 @@ class ProductController extends Controller
 
     }
 
-    public function getAll()
+    public function getAll(): JsonResponse
     {
-
+        $result = $this->showProductUseCase->execute();
+        return response()->json([
+            'status' => 'success',
+            'data' => $result
+        ]);
     }
 
     public function delete()

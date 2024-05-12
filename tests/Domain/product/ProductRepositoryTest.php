@@ -33,6 +33,10 @@ class ProductRepositoryTest extends TestCase
         self::assertTrue(
             method_exists($this->productRepository, 'delete'),
             'method not exist');
+
+        self::assertFalse(
+            method_exists($this->productRepository, 'delete'),
+            'method not exist');
     }
 
     public function testMockMethod()

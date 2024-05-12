@@ -22,7 +22,7 @@ class ProductRepositoryPostgres implements ProductRepository
 
     function save(Product $product): bool
     {
-        return DB::table('product')->insert([
+        return DB::table('products')->insert([
             'id' => Str::uuid(),
             'name' => $product->getName(),
             'price' => $product->getPrice(),
