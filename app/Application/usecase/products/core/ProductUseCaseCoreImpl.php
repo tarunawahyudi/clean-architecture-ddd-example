@@ -12,6 +12,10 @@ abstract class ProductUseCaseCoreImpl implements ProductUseCaseCore
             throw new \Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
         }
 
+        if (!is_string($product->getName())) {
+            throw new \Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
+        }
+
         if (empty($product->getName())) {
             throw new \Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
         }

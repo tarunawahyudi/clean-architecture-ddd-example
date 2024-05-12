@@ -26,6 +26,6 @@ class ModifyProductUseCase extends ProductUseCaseCoreImpl
     private function isAffected(Product $product, string $id): void
     {
         $affected = $this->productRepository->update($product, $id);
-        if ($affected > 0) throw new \Exception('MODIFY_PRODUCT_USE_CASE.PRODUCT_UPDATE_FAIL');
+        if ($affected <= 0) throw new \Exception('MODIFY_PRODUCT_USE_CASE.PRODUCT_UPDATE_FAIL');
     }
 }

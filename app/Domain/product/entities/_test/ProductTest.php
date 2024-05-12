@@ -14,7 +14,7 @@ class ProductTest extends TestCase
 
         $product = new Product(
             null,
-            2000,
+            2000.0,
             'example product'
         );
 
@@ -26,7 +26,7 @@ class ProductTest extends TestCase
 
         $product = new Product(
             'product 1',
-            2000,
+            2000.0,
             'example product'
         );
 

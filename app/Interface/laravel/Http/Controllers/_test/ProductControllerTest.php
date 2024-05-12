@@ -19,8 +19,8 @@ class ProductControllerTest extends TestCase
     private function insertDummy(): void
     {
         $this->pdo = Postgres::get()->connect();
-        $this->pdo->exec("INSERT INTO products(id, name, price, description)
-                    VALUES ('1', 'product 1', 2000, 'description')");
+        $query = "INSERT INTO products(id, name, price, description) VALUES ('1', 'product 1', 2000, 'description')";
+        $this->pdo->exec($query);
     }
 
     public function testFindByIdSuccess()
@@ -46,7 +46,7 @@ class ProductControllerTest extends TestCase
         $this->cleanTable();
 
         $this->post('/api/product', [
-            'price' => 20,
+            'price' => 20.0,
             'description' => 'asd',
         ])->assertJson([
             'status' => 'fail',
@@ -60,7 +60,7 @@ class ProductControllerTest extends TestCase
 
         $this->post('/api/product', [
             'name' => 'asd',
-            'price' => 20,
+            'price' => 20.0,
             'description' => 'asd',
         ])->assertJson([
             'status' => 'success',
@@ -95,5 +95,48 @@ class ProductControllerTest extends TestCase
                     ]
                 ]
             ]);
+    }
+
+    public function testUpdateProductNotFound()
+    {
+        $this->cleanTable();
+        $this->insertDummy();
+
+        $this->put('/api/product/xx', [
+            'name' => 'taruna',
+            'price' => 5000.0,
+            'description' => 'description 1'
+        ])->assertStatus(404)->assertJson([
+                Str::STATUS => App::RESPONSE_FAIL,
+                Str::MESSAGE => __('exception.MODIFY_PRODUCT_USE_CASE.PRODUCT_NOT_FOUND')]);
+    }
+
+    public function testUpdateProductFail()
+    {
+        $this->cleanTable();
+        $this->insertDummy();
+
+        $this->put('/api/product/1', [
+            'name' => 10,
+            'price' => 5000.0,
+            'description' => 'description 1'
+            ])->assertStatus(400)->assertJson([
+                Str::STATUS => App::RESPONSE_FAIL,
+                Str::MESSAGE => __('exception.PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY')
+            ]);
+    }
+
+    public function testUpdateProductSuccess()
+    {
+        $this->cleanTable();
+        $this->insertDummy();
+
+        $this->put('/api/product/1', [
+            'name' => 'Komeng',
+            'price' => 5000.0,
+            'description' => 'description 1'
+        ])->assertStatus(200)->assertJson([
+            Str::STATUS => App::RESPONSE_OK,
+            Str::MESSAGE => __('response.update_success')]);
     }
 }

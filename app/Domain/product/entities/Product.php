@@ -28,11 +28,15 @@ class Product
      * @throws Exception
      */
     private function validation(
-        ?string $name,
-        ?float $price,
-        ?string $description): void
+        $name,
+        $price,
+        $description): void
     {
         if ($name == null || $name == '') {
+            throw new Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
+        }
+
+        if (!is_string($name)) {
             throw new Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
         }
 
@@ -40,7 +44,7 @@ class Product
             throw new Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
         }
 
-        if ($description == null) {
+        if (!is_float($price)) {
             throw new Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
         }
     }
