@@ -10,4 +10,5 @@ interface ProductRepository
     function findAll();
     function save(Product $product);
     function delete(string $id);
+    function update(Product $product, string $id);
 }

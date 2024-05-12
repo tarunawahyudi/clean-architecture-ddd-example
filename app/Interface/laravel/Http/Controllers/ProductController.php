@@ -5,6 +5,7 @@ namespace App\Interface\laravel\Http\Controllers;
 use App\Application\usecase\products\AddProductUseCase;
 use App\Application\usecase\products\DeleteProductUseCase;
 use App\Application\usecase\products\FetchProductUseCase;
+use App\Application\usecase\products\ModifyProductUseCase;
 use App\Application\usecase\products\ShowProductUseCase;
 use App\Common\constant\App;
 use App\Common\constant\Str;
@@ -20,6 +21,7 @@ class ProductController extends Controller
         private readonly ShowProductUseCase   $showProductUseCase,
         private readonly DeleteProductUseCase $deleteProductUseCase,
         private readonly FetchProductUseCase  $fetchProductUseCase,
+        private readonly ModifyProductUseCase $modifyProductUseCase
     ) {}
 
     public function save(Request $request): JsonResponse
@@ -52,6 +54,22 @@ class ProductController extends Controller
         return response()->json([
             Str::STATUS => App::RESPONSE_OK,
             Str::DATA => $result
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->route('id');
+        $product = new Product(
+            $request->name,
+            $request->price,
+            $request->description
+        );
+
+        $this->modifyProductUseCase->execute($product, $id);
+        return response()->json([
+            Str::STATUS => App::RESPONSE_OK,
+            Str::MESSAGE => __('response.update_success')
         ]);
     }
 

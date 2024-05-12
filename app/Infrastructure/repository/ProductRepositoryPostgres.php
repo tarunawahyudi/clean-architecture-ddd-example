@@ -35,4 +35,15 @@ class ProductRepositoryPostgres implements ProductRepository
     {
         return DB::table('products')->delete($id);
     }
+
+    function update(Product $product, string $id): int
+    {
+        return DB::table('products')
+            ->where('id', $id)
+            ->update([
+                'name' => $product->getName(),
+                'price' => $product->getPrice(),
+                'description' => $product->getDescription()
+            ]);
+    }
 }

@@ -20,8 +20,6 @@ class DeleteProductUseCase extends ProductUseCaseCoreImpl
     private function isAvailable(?string $id): void
     {
         $result = $this->productRepository->findById($id);
-        if (!$result) {
-            throw new \Exception('DELETE_PRODUCT_USE_CASE.PRODUCT_NOT_FOUND');
-        }
+        if (!$result) throw new \Exception('DELETE_PRODUCT_USE_CASE.PRODUCT_NOT_FOUND');
     }
 }
