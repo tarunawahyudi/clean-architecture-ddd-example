@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\usecase\users;
+namespace App\Application\usecase\products;
 
-use App\Application\usecase\users\core\ProductUseCaseCore;
+use App\Application\usecase\products\core\ProductUseCaseCore;
 use App\Domain\product\ProductRepository;
 
 class DeleteProductUseCase extends ProductUseCaseCore

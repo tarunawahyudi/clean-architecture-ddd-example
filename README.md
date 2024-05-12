@@ -48,7 +48,7 @@ This application is a RESTful API built using the Laravel framework. By adopting
 ├───app
 │   ├───Application
 │   │   └───usecase
-│   │       └───users
+│   │       └───products
 │   │           └───core
 │   ├───Common
 │   │   ├───constant
@@ -70,13 +70,14 @@ This application is a RESTful API built using the Laravel framework. By adopting
 │           │   └───Middleware
 │           ├───Models
 │           └───Providers
+
 ```
 
-## Usecase Utama
+## Use Case (Business Logic)
 
-### Users
+### Products
 
-Inside the `Application/usecase/users` directory, you will find the implementation of usecases for user management. This allows you to perform CRUD operations on user entities.
+Inside the `Application/usecase/products` directory, you will find the implementation of usecases for product management. This allows you to perform CRUD operations on user entities.
 ## Testing
 
 We provide tests covering various aspects of application functionality. These tests are located in the `_test` directories in each layer of the application, including usecases, entities, and controllers.

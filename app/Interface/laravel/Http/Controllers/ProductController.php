@@ -2,9 +2,9 @@
 
 namespace App\Interface\laravel\Http\Controllers;
 
-use App\Application\usecase\users\AddProductUseCase;
-use App\Application\usecase\users\DeleteProductUseCase;
-use App\Application\usecase\users\ShowProductUseCase;
+use App\Application\usecase\products\AddProductUseCase;
+use App\Application\usecase\products\DeleteProductUseCase;
+use App\Application\usecase\products\ShowProductUseCase;
 use App\Common\constant\App;
 use App\Common\constant\Str;
 use App\Domain\product\entities\Product;

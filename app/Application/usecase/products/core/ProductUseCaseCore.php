@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\usecase\users\core;
+namespace App\Application\usecase\products\core;
 
 use App\Domain\product\entities\Product;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Application\usecase\users;
+namespace App\Application\usecase\products;
 
 use App\Domain\product\entities\Product;
 use App\Domain\product\ProductRepository;
-use App\Application\usecase\users\core\ProductUseCaseCore;
+use App\Application\usecase\products\core\ProductUseCaseCore;
 
 class AddProductUseCase extends ProductUseCaseCore
 {
