@@ -10,3 +10,5 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/product', [ProductController::class, 'save']);
 Route::get('/product', [ProductController::class, 'getAll']);
+Route::get('/product/{id}', [ProductController::class, 'show']);
+Route::delete('/product/{id}', [ProductController::class, 'delete']);

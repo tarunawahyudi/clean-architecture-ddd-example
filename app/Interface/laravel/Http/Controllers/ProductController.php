@@ -3,6 +3,7 @@
 namespace App\Interface\laravel\Http\Controllers;
 
 use App\Application\usecase\users\AddProductUseCase;
+use App\Application\usecase\users\DeleteProductUseCase;
 use App\Application\usecase\users\ShowProductUseCase;
 use App\Domain\product\entities\Product;
 use Illuminate\Http\JsonResponse;
@@ -13,7 +14,8 @@ class ProductController extends Controller
 {
     public function __construct(
         private readonly AddProductUseCase $addProductUseCase,
-        private readonly ShowProductUseCase $showProductUseCase
+        private readonly ShowProductUseCase $showProductUseCase,
+        private readonly DeleteProductUseCase $deleteProductUseCase,
     ) {}
 
     public function save(Request $request): JsonResponse
@@ -30,22 +32,32 @@ class ProductController extends Controller
         ], 201);
     }
 
-    public function get()
+    public function show(Request $request): JsonResponse
     {
-
-    }
-
-    public function getAll(): JsonResponse
-    {
-        $result = $this->showProductUseCase->execute();
+        $id = $request->route('id');
+        $result = $this->showProductUseCase->execute($id);
         return response()->json([
             'status' => 'success',
             'data' => $result
         ]);
     }
 
-    public function delete()
+    public function getAll(): JsonResponse
     {
+        $result = $this->showProductUseCase->execute(null);
+        return response()->json([
+            'status' => 'success',
+            'data' => $result
+        ]);
+    }
 
+    public function delete(Request $request): JsonResponse
+    {
+        $id = $request->route('id');
+        $this->deleteProductUseCase->execute($id);
+        return response()->json([
+            'status' => 'success',
+            'data' => __('response.delete_success')
+        ]);
     }
 }

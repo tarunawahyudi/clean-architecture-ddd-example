@@ -6,18 +6,19 @@ use App\Domain\product\ProductRepository;
 use App\Domain\product\entities\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 
 class ProductRepositoryPostgres implements ProductRepository
 {
     function findById(string $id)
     {
-        return DB::table('warehouse')
-            ->where('id', '==', $id)->first();
+        return DB::table('products')
+            ->where('id', $id)->get()->first();
     }
 
-    function findAll()
+    function findAll(): Collection
     {
-        return DB::table('warehouse')->get();
+        return DB::table('products')->get();
     }
 
     function save(Product $product): bool
@@ -32,6 +33,6 @@ class ProductRepositoryPostgres implements ProductRepository
 
     function delete(string $id): int
     {
-        return DB::table('warehouse')->delete($id);
+        return DB::table('products')->delete($id);
     }
 }

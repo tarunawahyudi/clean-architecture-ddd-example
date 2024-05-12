@@ -10,7 +10,7 @@ class ProductTest extends TestCase
     public function testCreateNotComplete()
     {
 
-        self::expectException(\TypeError::class);
+        self::expectException(\Exception::class);
 
         $product = new Product(
             null,

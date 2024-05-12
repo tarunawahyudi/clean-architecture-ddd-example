@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ProductRepository::class, ProductRepositoryPostgres::class);
+        $this->app->singleton(ProductRepository::class, ProductRepositoryPostgres::class);
     }
 
     /**

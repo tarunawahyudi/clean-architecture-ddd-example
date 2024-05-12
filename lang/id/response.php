@@ -14,8 +14,7 @@ return [
     |
     */
 
-    'failed' => 'Kredensial ini tidak cocok dengan data kami.',
-    'password' => 'Kata sandi yang diberikan salah.',
-    'throttle' => 'Terlalu banyak percobaan masuk. Silakan coba lagi dalam :seconds detik.',
     'system_error' => 'Terjadi kesalahan pada sistem kami. Mohon coba lagi nanti.',
+    'method_not_allowed' => 'Method yang anda hit ke server kami salah. Mohon disesuaikan kembali',
+    'delete_success' => 'Data berhasil dihapus'
 ];

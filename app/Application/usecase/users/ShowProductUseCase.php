@@ -11,8 +11,17 @@ class ShowProductUseCase extends ProductUseCaseCore
         private readonly ProductRepository $productRepository
     ) {}
 
-    public function execute()
+    public function execute(?string $id)
     {
+        return $id ? $this->findById($id) : $this->findAll();
+    }
+
+    private function findById($id)
+    {
+        return $this->productRepository->findById($id);
+    }
+
+    private function findAll() {
         return $this->productRepository->findAll();
     }
 }
