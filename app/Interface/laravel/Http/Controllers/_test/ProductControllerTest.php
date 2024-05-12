@@ -2,6 +2,8 @@
 
 namespace App\Interface\laravel\Http\Controllers\_test;
 
+use App\Common\constant\App;
+use App\Common\constant\Str;
 use App\Infrastructure\database\Postgres;
 use Tests\TestCase;
 
@@ -72,6 +74,26 @@ class ProductControllerTest extends TestCase
             ->assertJson([
                 'status' => 'fail',
                 'message' => __('exception.DELETE_PRODUCT_USE_CASE.PRODUCT_NOT_FOUND')
+            ]);
+    }
+
+    public function testFindAll()
+    {
+        $this->cleanTable();
+        $this->insertDummy();
+
+        $this->get('/api/product')
+            ->assertStatus(200)
+            ->assertJson([
+                Str::STATUS => App::RESPONSE_OK,
+                Str::DATA => [
+                    [
+                        'id' => '1',
+                        'name' => 'product 1',
+                        'price' => 2000,
+                        'description' => 'description',
+                    ]
+                ]
             ]);
     }
 }

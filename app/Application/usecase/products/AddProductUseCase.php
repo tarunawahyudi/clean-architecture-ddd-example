@@ -4,9 +4,9 @@ namespace App\Application\usecase\products;
 
 use App\Domain\product\entities\Product;
 use App\Domain\product\ProductRepository;
-use App\Application\usecase\products\core\ProductUseCaseCore;
+use App\Application\usecase\products\core\ProductUseCaseCoreImpl;
 
-class AddProductUseCase extends ProductUseCaseCore
+class AddProductUseCase extends ProductUseCaseCoreImpl
 {
     public function __construct(
         private readonly ProductRepository $productRepository

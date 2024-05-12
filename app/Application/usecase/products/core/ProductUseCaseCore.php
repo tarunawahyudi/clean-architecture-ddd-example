@@ -4,21 +4,7 @@ namespace App\Application\usecase\products\core;
 
 use App\Domain\product\entities\Product;
 
-abstract class ProductUseCaseCore
+interface ProductUseCaseCore
 {
-
-    public function validate(Product $product): void
-    {
-        if (!$product->getName() || !$product->getPrice() || !$product->getDescription()) {
-            throw new \Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
-        }
-
-        if (empty($product->getName())) {
-            throw new \Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
-        }
-
-        if (is_float($product->getPrice())) {
-            throw new \Exception('PRODUCT.NOT_CONTAIN_NEEDED_PROPERTY');
-        }
-    }
+    public function validate(Product $product);
 }

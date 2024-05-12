@@ -2,10 +2,10 @@
 
 namespace App\Application\usecase\products;
 
-use App\Application\usecase\products\core\ProductUseCaseCore;
+use App\Application\usecase\products\core\ProductUseCaseCoreImpl;
 use App\Domain\product\ProductRepository;
 
-class DeleteProductUseCase extends ProductUseCaseCore
+class DeleteProductUseCase extends ProductUseCaseCoreImpl
 {
     public function __construct(
         private readonly ProductRepository $productRepository

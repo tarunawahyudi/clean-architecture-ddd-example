@@ -2,10 +2,10 @@
 
 namespace App\Application\usecase\products;
 
-use App\Application\usecase\products\core\ProductUseCaseCore;
+use App\Application\usecase\products\core\ProductUseCaseCoreImpl;
 use App\Domain\product\ProductRepository;
 
-class ShowProductUseCase extends ProductUseCaseCore
+class ShowProductUseCase extends ProductUseCaseCoreImpl
 {
     public function __construct(
         private readonly ProductRepository $productRepository
@@ -13,15 +13,6 @@ class ShowProductUseCase extends ProductUseCaseCore
 
     public function execute(?string $id)
     {
-        return $id ? $this->findById($id) : $this->findAll();
-    }
-
-    private function findById($id)
-    {
         return $this->productRepository->findById($id);
-    }
-
-    private function findAll() {
-        return $this->productRepository->findAll();
     }
 }
